@@ -1,8 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
 var app = express();
+// 解析前端传过来的body对象
+var bodyParser = require("body-parser");
 
-var {baiyangapi} = require("./middleware/baiyangapi")
+var {baiyangapi} = require("./middleware/baiyangapi");
+var musicroute = require("./middleware/musicLibraryapi");
+
+app.use("/api/musicLibrary",musicroute);
 
 
 //跨域
@@ -15,7 +20,11 @@ app.all('*', function (req, res, next) {
   next();
   });
 
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+
   baiyangapi(app);
+
   // //json类型的body
   // app.use(bodyParser.json());
   // //string类型body
@@ -30,31 +39,31 @@ app.all('*', function (req, res, next) {
 
 
 
-  app.get("/subject/:id?",function(req,res){
-    console.log(req.url);
+  // app.get("/subject/:id?",function(req,res){
+  //   console.log(req.url);
     
-    console.log(req.params);
-      if(req.params.id == "math"){
-        res.json({
-          data:["集合","几何"]
-          })
-        }else if(req.params.id == "yuwen"){
+  //   console.log(req.params);
+  //     if(req.params.id == "math"){
+  //       res.json({
+  //         data:["集合","几何"]
+  //         })
+  //       }else if(req.params.id == "yuwen"){
 
-          Music.find({},(err,data)=>{
-            if(err) throw err;
+  //         Music.find({},(err,data)=>{
+  //           if(err) throw err;
             
-            res.json({
-              data:data
-              })
-          })
+  //           res.json({
+  //             data:data
+  //             })
+  //         })
 
          
-        }else{
-          res.json({
-            data:["全部","都有"]
-            })
-        }
-  })
+  //       }else{
+  //         res.json({
+  //           data:["全部","都有"]
+  //           })
+  //       }
+  // })
 
   // var server = app.listen(3001, function () {
   //   var port = server.address().port;
