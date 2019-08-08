@@ -1,7 +1,7 @@
 // 引入模块
 var mongoose = require("mongoose");
 // 连接数据库
-mongoose.connect("mongodb://localhost:27017/baiyang");
+mongoose.connect("mongodb://localhost:27017/test");
 //mongoose.connect("mongodb+srv://Bella:x123456@cluster0-4zdq0.mongodb.net/musicLibrary?retryWrites=true&w=majority");
 
 var MusicLibrarySchema = mongoose.Schema;

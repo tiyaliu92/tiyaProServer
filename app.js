@@ -4,12 +4,12 @@ var app = express();
 // 解析前端传过来的body对象
 var bodyParser = require("body-parser");
 
-var {baiyangapi} = require("./middleware/baiyangapi");
+//音乐录入
 var musicroute = require("./middleware/musicLibraryapi");
-
-app.use("/api/musicLibrary",musicroute);
-
-
+//登录 注册
+var loginroute = require("./middleware/loginapi");
+//注册
+var registerroute = require("./middleware/registerapi");
 //跨域
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -23,8 +23,10 @@ app.all('*', function (req, res, next) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  baiyangapi(app);
-
+  app.use("/api/musicLibrary",musicroute);
+  app.use("/api/login",loginroute);
+  app.use("/api/register",registerroute);
+  
   // //json类型的body
   // app.use(bodyParser.json());
   // //string类型body
