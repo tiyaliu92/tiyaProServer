@@ -5,10 +5,17 @@ let router = express.Router();
 //登录
 router.post("/",(req,res)=>{
     Login.find(req.body,(err,data)=>{
-        console.log(data);
-        res.json({
-           data
-        });
+        if(data.length>0){
+            res.json({
+                code:200
+             });
+        }else{
+            res.json({
+                code:202,
+                message:'用户不存在，请先登录'
+             });
+        }
+        
     })
 })
 

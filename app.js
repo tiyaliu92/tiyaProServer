@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 
 //音乐录入
 var musicroute = require("./middleware/musicLibraryapi");
-//登录 注册
+//登录 
 var loginroute = require("./middleware/loginapi");
 //注册
 var registerroute = require("./middleware/registerapi");
